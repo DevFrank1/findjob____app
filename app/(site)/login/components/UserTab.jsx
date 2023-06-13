@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { signIn } from 'next-auth/react'
+import { toast } from "react-hot-toast"
+import { useRouter } from "next/navigation"
 import {
     Card,
     Input,
@@ -8,17 +11,47 @@ import {
 } from "@material-tailwind/react";
 
 export default function UserTab() {
+    const router = useRouter()
+    const [userData, setUserData] = useState({
+        email: '',
+        password: ''
+    });
+
+    const loginUser = async (e) => {
+        e.preventDefault()
+        signIn('user',
+            {
+                ...userData, redirect: false
+            })
+            .then((callback) => {
+                if (callback?.error) {
+                    toast.error(callback.error)
+                }
+
+                if (callback?.ok && !callback?.error) {
+                    toast.success('Logged in successfully!')
+                }
+            }).then(() => router.push('/'))
+    }
+
+    useEffect(() => {
+        setUserData({
+            email: '',
+            password: '',
+        })
+    }, []);
+
     return (
         <Card className='items-center' color="transparent" shadow={false}>
             <Typography variant="h4" color="blue-gray">
                 Sign In
             </Typography>
-            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+            <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96" onSubmit={loginUser}>
                 <div className="mb-4 flex flex-col gap-6">
-                    <Input size="lg" label="Email" />
-                    <Input type="password" size="lg" label="Password" />
+                    <Input size="lg" label="Email" value={userData.email} onChange={e => setUserData({ ...userData, email: e.target.value })} />
+                    <Input type="password" size="lg" label="Password" value={userData.password} onChange={e => setUserData({ ...userData, password: e.target.value })} />
                 </div>
-                <Button className="mt-6" fullWidth>
+                <Button className="mt-6" fullWidth type='submit'>
                     Login
                 </Button>
                 <Typography color="gray" className="mt-4 text-center font-normal">

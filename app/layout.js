@@ -1,3 +1,5 @@
+import SessionContextProvider from './context/SessionContext'
+import ToasterContext from './context/ToasterContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -11,7 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionContextProvider>
+          <ToasterContext />
+          {children}
+        </SessionContextProvider>
+      </body>
     </html>
   )
 }

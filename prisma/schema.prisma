@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  name            String?
+  surname         String?
+  email           String?          @unique
+  emailVerified   DateTime?
+  imageByte       Bytes?
+  hashedPassword  String?
+  type            String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  jobApplications JobApplication[]
+}
+
+model Business {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?      @unique
+  hashedPassword String?
+  type           String?
+  jobPostings    JobPosting[]
+}
+
+model JobPosting {
+  id                  String           @id @default(auto()) @map("_id") @db.ObjectId
+  title               String?
+  description         String?
+  requirements        String?
+  location            String?
+  salary              Float?
+  createdAt           DateTime         @default(now())
+  applicationDeadline DateTime?
+  business            Business?        @relation(fields: [businessId], references: [id])
+  businessId          String?          @db.ObjectId
+  jobApplications     JobApplication[]
+}
+
+model JobApplication {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  applicationText String
+  applicationDate DateTime   @default(now())
+  resume          Bytes?
+  user            User       @relation(fields: [userId], references: [id])
+  userId          String     @db.ObjectId
+  jobPosting      JobPosting @relation(fields: [jobId], references: [id])
+  jobId           String     @db.ObjectId
+}
