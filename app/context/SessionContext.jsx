@@ -12,7 +12,6 @@ export default async function SessionContextProvider({ children }) {
 
     useEffect(() => {
         const getSession = async () => {
-
             try {
                 const response = await axios.get('/api/getSession');
                 toast.success('Session got');

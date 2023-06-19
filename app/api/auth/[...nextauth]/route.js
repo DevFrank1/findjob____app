@@ -99,6 +99,9 @@ export const authOptions = {
     session: {
         strategy: "jwt",
     },
+    pages: {
+        signIn: '/login',
+    },
     callbacks: {
         session: ({ session, token }) => {
             console.log("Session Callback", { session, token });

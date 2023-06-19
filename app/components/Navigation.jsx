@@ -19,9 +19,12 @@ import ProfileMenu from './ProfileMenu';
 import { PlusIcon } from "@heroicons/react/24/outline";
 import JobPostingModal from './JobPostingModal';
 
+import { useRouter } from 'next/navigation';
+
 
 
 export default function Navigation() {
+    const router = useRouter();
 
     const [openModal, setOpenModal] = useState(false);
 
@@ -36,11 +39,10 @@ export default function Navigation() {
                     Material Tailwind
                 </Typography>
                 <div className='flex items-center justify-center flex-row'>
-                    <Button variant="text" color="blue-gray" className='mx-4 p-2 rounded-full bg-blue-gray-100 '
-                        onClick={() => setOpenModal(true)}>
+                    <Button variant="text" onClick={()=> router.push('/createJob')} color="blue-gray" className='mx-4 p-2 rounded-lg bg-blue-gray-100 '>
                         <PlusIcon className='h-5 w-5' />
                     </Button>
-                    <JobPostingModal openModal={openModal} setOpenModal={setOpenModal} />
+                    {/* <JobPostingModal openModal={openModal} setOpenModal={setOpenModal} /> */}
                     <ProfileMenu />
                 </div>
             </div>

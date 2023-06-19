@@ -19,6 +19,8 @@ import {
     PowerIcon,
 } from "@heroicons/react/24/outline";
 
+import { signOut } from 'next-auth/react';
+
 // profile menu component
 const profileMenuItems = [
     {
@@ -37,10 +39,10 @@ const profileMenuItems = [
         label: "Help",
         icon: LifebuoyIcon,
     },
-    {
-        label: "Sign Out",
-        icon: PowerIcon,
-    },
+    // {
+    //     label: "Sign Out",
+    //     icon: PowerIcon,
+    // },
 ];
 
 export default function ProfileMenu() {
@@ -96,6 +98,25 @@ export default function ProfileMenu() {
                         </MenuItem>
                     );
                 })}
+                <MenuItem
+                    key='Sign Out'
+                    onClick={() => { signOut({ callbackUrl: '/login' }); }}
+                    className="flex items-center gap-2 rounded
+                         hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                >
+                    {React.createElement(PowerIcon, {
+                        className: "h-4 w-4 text-red-500",
+                        strokeWidth: 2,
+                    })}
+                    <Typography
+                        as="span"
+                        variant="small"
+                        className="font-normal"
+                        color="red"
+                    >
+                        Sign Out
+                    </Typography>
+                </MenuItem>
             </MenuList>
         </Menu>
     )
