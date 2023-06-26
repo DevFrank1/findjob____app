@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import HomeBoard from './(site)/home/page';
 import './page.css';
 

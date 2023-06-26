@@ -62,16 +62,16 @@ export default function JobList({ setCurrentJobDetail }) {
 
 
     return (
-        <Card className="w-full lg:w-6/12 h-max my-4 shadow-sm">
-            <List>
+        <Card className="w-full lg:w-6/12 h-10/12 my-4 shadow-sm overflow-y-scroll scroll-smooth">
+            <List className='bg-blue-gray-200'>
                 {jobList.map((element) => (
-                    <ListItem key={element.id} className='px-2 py-2' onClick={() => chosenJobDetail(element.id)}>
+                    <ListItem key={element.id} className='px-2 py-1 border-b-2' onClick={() => chosenJobDetail(element.id)}>
                         <ListItemPrefix>
                             <Avatar variant="circular" alt="candice" src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80" />
                         </ListItemPrefix>
                         <div>
                             <Typography variant="h6" color="blue-gray">
-                                Candice Wu
+                                {element.title}
                             </Typography>
                             <Typography variant="small" color="gray" className="font-normal">
                                 Software Engineer @ Material Tailwind

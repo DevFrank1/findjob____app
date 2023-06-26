@@ -20,6 +20,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 // profile menu component
 const profileMenuItems = [
@@ -45,9 +46,10 @@ const profileMenuItems = [
     // },
 ];
 
-export default function ProfileMenu() {
+export default function ProfileMenu({user}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
+    const router = useRouter();
 
     return (
         <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -98,6 +100,24 @@ export default function ProfileMenu() {
                         </MenuItem>
                     );
                 })}
+                <MenuItem
+                    key='Dashboard'
+                    onClick={() => { router.push(`/${user?.user?.name}/dashboard`) }}
+                    className="flex items-center gap-2 rounded"
+                >
+                    {React.createElement(PowerIcon, {
+                        className: "h-4 w-4",
+                        strokeWidth: 2,
+                    })}
+                    <Typography
+                        as="span"
+                        variant="small"
+                        className="font-normal"
+
+                    >
+                        Dashboard
+                    </Typography>
+                </MenuItem>
                 <MenuItem
                     key='Sign Out'
                     onClick={() => { signOut({ callbackUrl: '/login' }); }}
