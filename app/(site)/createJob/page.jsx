@@ -23,8 +23,14 @@ export default function CreateJob() {
             ...jobPostData,
             email: user?.user?.email
         })
-        await axios.post('/api/postJob', jobPostData)
-            .then(() => toast.success('Job has been posted!'))
+        await fetch('/api/postJob', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jobPostData)
+        }).then(() => toast.success('Job has been posted!'))
             .catch(() => toast.error('Something went wrong!'));
         setJobPostData({
             title: '',

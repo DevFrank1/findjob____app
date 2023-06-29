@@ -2,14 +2,20 @@ import prisma from '../../libs/prismadb'
 import { NextResponse } from 'next/server'
 
 export async function GET(request) {
+    const body = await request.json();
+
+    const { businessId } = body;
 
     try {
-        const jobs = await prisma.JobPosting.findMany({
+        const postedJobs = await prisma.JobPosting.findMany({
+            where: {
+                businessId: businessId
+            },
             include: {
                 business: true
             }
         });
-        return NextResponse.json(jobs)
+        return NextResponse.json(postedJobs)
     } catch (error) {
         return NextResponse('cant get it', { status: 400 })
     }

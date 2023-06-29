@@ -42,7 +42,7 @@ model JobPosting {
   salary              Float?
   createdAt           DateTime         @default(now())
   applicationDeadline DateTime?
-  business            Business?        @relation(fields: [businessId], references: [id])
+  business            Business?        @relation(fields: [businessId], references: [id], onDelete: Cascade)
   businessId          String?          @db.ObjectId
   jobApplications     JobApplication[]
 }
@@ -52,8 +52,8 @@ model JobApplication {
   applicationText String
   applicationDate DateTime   @default(now())
   resume          Bytes?
-  user            User       @relation(fields: [userId], references: [id])
+  user            User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId          String     @db.ObjectId
-  jobPosting      JobPosting @relation(fields: [jobId], references: [id])
+  jobPosting      JobPosting @relation(fields: [jobId], references: [id], onDelete: Cascade)
   jobId           String     @db.ObjectId
 }

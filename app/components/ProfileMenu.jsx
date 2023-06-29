@@ -102,7 +102,7 @@ export default function ProfileMenu({user}) {
                 })}
                 <MenuItem
                     key='Dashboard'
-                    onClick={() => { router.push(`/${user?.user?.name}/dashboard`) }}
+                    onClick={() => { router.push(`/dashboard/${user?.user?.name}`) }}
                     className="flex items-center gap-2 rounded"
                 >
                     {React.createElement(PowerIcon, {

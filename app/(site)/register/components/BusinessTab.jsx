@@ -26,8 +26,14 @@ export default function BusinessTab() {
 
     const registerBusiness = async (e) => {
         e.preventDefault()
-        await axios.post('/api/registerBusiness', businessData)
-            .then(() => toast.success('User has been registered!'))
+        await fetch('/api/registerBusiness', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(businessData)
+        }).then(() => toast.success('User has been registered!'))
             .catch(() => toast.error('Something went wrong!'));
         await signIn('business',
             {

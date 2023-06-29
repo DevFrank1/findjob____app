@@ -27,8 +27,14 @@ export default function UserTab() {
 
     const registerUser = async (e) => {
         e.preventDefault()
-        await axios.post('/api/registerUser', userData)
-            .then(() => toast.success('User has been registered!'))
+        await fetch('/api/registerUser', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        }).then(() => toast.success('User has been registered!'))
             .catch(() => toast.error('Something went wrong!'));
         await signIn('user',
             {

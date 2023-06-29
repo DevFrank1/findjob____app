@@ -3,9 +3,9 @@ import { toast } from "react-hot-toast";
 
 export default async function useSessionDetail() {
     try {
-        const response = await axios.get('/api/getSession');
+        const response = await fetch('/api/getSession');
         toast.success('Session got');
-        const sessionData = await response.data;
+        const sessionData = await response.json();
         // console.log(sessionData);
         return sessionData;
     } catch (error) {
