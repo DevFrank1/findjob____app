@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { Spinner } from '@material-tailwind/react';
-import AuthenticatedLayout from './[user]/(authenticated)/layout';
+import AuthenticatedLayout from './[user]/layout';
 
 export default function Dashboard({ children, session }) {
 

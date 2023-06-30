@@ -39,10 +39,10 @@ export default function Sidebar() {
                 </Typography>
             </div>
             <List>
-                <ListItem onClick={() => { router.push(`/dashboard/${userParams}`) }}>
+                <ListItem onClick={() => { router.push(`/dashboard/b/${userParams}`) }}>
                     Dashboard
                 </ListItem>
-                <ListItem onClick={() => { router.push(`/dashboard/${userParams}/jobs`) }}>
+                <ListItem onClick={() => { router.push(`/dashboard/b/${userParams}/jobs`) }}>
                     Posted Jobs
                 </ListItem>
                 {/* <ListItem
