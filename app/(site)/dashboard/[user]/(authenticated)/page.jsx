@@ -2,16 +2,11 @@
 
 import React from 'react'
 import Main from './components/Main'
-import { usePathname, useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react';
 
-export default function Dashboard({ children }) {
-    // const pathname = usePathname();
-    // const router = useRouter();
-    // const { username } = router.query;
+export default function AuthenticatedDashboard({ children }) {
     return (
-        <div>
-            {children}
+        <div className='w-full h-full flex'>
+            <Main />
         </div>
     )
 }

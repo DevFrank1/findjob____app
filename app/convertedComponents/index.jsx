@@ -6,3 +6,6 @@ export { default as ListItemPrefix } from './ListItemPrefix';
 export { default as ListItemSuffix } from './ListItemSuffix';
 export { default as Card } from './Card';
 export { default as Typography } from './Typography';
+export { default as Navbar } from './Navbar';
+export { default as Spinner } from './Spinner';
+export { default as Chip } from './Chip';

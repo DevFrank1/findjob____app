@@ -6,6 +6,11 @@ import React from 'react';
 // import { useSession } from 'next-auth/react';
 import useGetJobDetail from '../hooks/useGetJobDetail';
 import { Avatar, Button, List, ListItem, ListItemPrefix, ListItemSuffix, Card, Typography } from '../convertedComponents';
+import useSessionDetail from '../hooks/useSessionDetail';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
+import useSession from '../hooks/useSession';
+
 
 export default async function JobDetail() {
     // const [user, setUser] = useState();
@@ -47,15 +52,18 @@ export default async function JobDetail() {
     // console.log(user)
 
     const job = await useGetJobDetail()
+    // const user = await useSessionDetail()
+    const session = await useSession()
     console.log(job)
+    console.log('user', session)
     return (
         <Card className="hidden lg:flex lg:w-6/12 bg-blue-gray-50 my-4 shadow-sm p-4 items-center justify-center">
             <h1>
-                {job.value.title}
+                {job?.value.title}
             </h1>
-            {/* <h1>
-                {currentJobDetail?.title}
-            </h1> */}
+            <h1>
+                {session?.user?.name}
+            </h1>
             <Button variant="text" className='bg-blue-gray-100' color="blue-gray" >
                 apply
             </Button>

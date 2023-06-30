@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 
 import {
@@ -10,43 +12,11 @@ import {
     Avatar,
 } from "@material-tailwind/react";
 
-import {
-    UserCircleIcon,
-    ChevronDownIcon,
-    Cog6ToothIcon,
-    InboxArrowDownIcon,
-    LifebuoyIcon,
-    PowerIcon,
-} from "@heroicons/react/24/outline";
-
+import { ChevronDownIcon, PowerIcon, } from "@heroicons/react/24/outline";
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-// profile menu component
-const profileMenuItems = [
-    {
-        label: "My Profile",
-        icon: UserCircleIcon,
-    },
-    {
-        label: "Edit Profile",
-        icon: Cog6ToothIcon,
-    },
-    {
-        label: "Inbox",
-        icon: InboxArrowDownIcon,
-    },
-    {
-        label: "Help",
-        icon: LifebuoyIcon,
-    },
-    // {
-    //     label: "Sign Out",
-    //     icon: PowerIcon,
-    // },
-];
-
-export default function ProfileMenu({user}) {
+export default function ProfileMenu({ session }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
     const router = useRouter();
@@ -74,35 +44,12 @@ export default function ProfileMenu({user}) {
                 </Button>
             </MenuHandler>
             <MenuList className="p-1">
-                {profileMenuItems.map(({ label, icon }, key) => {
-                    const isLastItem = key === profileMenuItems.length - 1;
-                    return (
-                        <MenuItem
-                            key={label}
-                            onClick={closeMenu}
-                            className={`flex items-center gap-2 rounded ${isLastItem
-                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                : ""
-                                }`}
-                        >
-                            {React.createElement(icon, {
-                                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                                strokeWidth: 2,
-                            })}
-                            <Typography
-                                as="span"
-                                variant="small"
-                                className="font-normal"
-                                color={isLastItem ? "red" : "inherit"}
-                            >
-                                {label}
-                            </Typography>
-                        </MenuItem>
-                    );
-                })}
                 <MenuItem
                     key='Dashboard'
-                    onClick={() => { router.push(`/dashboard/${user?.user?.name}`) }}
+                    onClick={() => {
+                        session.user.type === 'business' ? router.push(`/dashboard/b/${session?.user?.name}`) :
+                            router.push(`/dashboard/u/${session?.user?.name}`)
+                    }}
                     className="flex items-center gap-2 rounded"
                 >
                     {React.createElement(PowerIcon, {
