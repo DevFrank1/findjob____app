@@ -17,7 +17,7 @@ export default function Dashboard({ children, session }) {
     if (!session) {
         return <div>invalid user</div>
     }
-    if (decodedUser !== session.user.name) {
+    if (decodedUser !== session?.user?.name) {
         return <div>invalid user</div>
     }
     return (
