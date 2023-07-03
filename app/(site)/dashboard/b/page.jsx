@@ -5,14 +5,14 @@ import React from 'react';
 // import { Spinner } from '@material-tailwind/react';
 // import AuthenticatedLayout from './[user]/layout';
 
-export default function Dashboard({ children, session }) {
+export default function Dashboard({ children }) {
 
  
     // console.log(decodedUser);
 
-    if (!session) {
-        return <div>invalid user</div>
-    }
+    // if (!session) {
+    //     return <div>invalid user</div>
+    // }
     // if (decodedUser !== session?.user?.name) {
     //     return <div>invalid user</div>
     // }
