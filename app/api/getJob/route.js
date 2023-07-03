@@ -11,6 +11,6 @@ export async function GET(request) {
         });
         return NextResponse.json(jobs)
     } catch (error) {
-        return NextResponse('cant get it', { status: 400 })
+        return new NextResponse('cant get it', { status: 400 })
     }
 }

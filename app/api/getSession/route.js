@@ -8,6 +8,6 @@ export async function GET(request) {
         const session = await getServerSession(authOptions);
         return NextResponse.json(session)
     } catch (error) {
-        return NextResponse('cant get session', { status: 400 })
+        return new NextResponse('cant get session', { status: 400 })
     }
 }
